@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from openpyxl import load_workbook
+from openpyxl import *
 
 workSheet = load_workbook("data.xlsx")["Sheet1"]
 firstCloumn = []
@@ -13,11 +13,13 @@ for j in range(1, workSheet.max_row + 1):
 
 x = np.array(firstCloumn)
 y = np.array(secondCloumn)
+dy = y[1:] - y[:-1]
+dx = x[1:] - x[:-1]
 
-diff1 = 3*(x**2)
-diff2 = 6*x
+d2y = dy[1:] - dy[:-1]
 
-plt.plot(x, y)
-plt.plot(x, diff1)
-plt.plot(x, diff2)
-plt.show()
+diff1 = dy/dx
+diff2 = d2y/dx[1:]
+
+
+
